@@ -33,9 +33,11 @@ def consumer(ch, method, properties, body):
     except Exception as e:
         logging.error(e, exc_info=True)
 
-channel.basic_consume(consumer,
-                      queue=settings.QUEUE_NAME,
-                      no_ack=True)
 
-print(' [*] Waiting for messages. To exit press CTRL+C')
-channel.start_consuming()
+if __name__ == '__main__':
+    channel.basic_consume(consumer,
+                          queue=settings.QUEUE_NAME,
+                          no_ack=True)
+
+    print(' [*] Waiting for messages. To exit press CTRL+C')
+    channel.start_consuming()
