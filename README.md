@@ -10,7 +10,7 @@ First argument is a filepath to a file with a list of links, one per line.
 Second argument sets how many webpages should a producer try to get concurrently.
 Producer stores the sources of the links in rabbitmq queue.
 
-You can start consumer.py workers without any parameters `python consumer.py` . They will consume links form the queue, extract links from documents, and store the results in redis database. 
-The key will be the link of the page and the value is every link found on that page, separated by a space. Only http links are stored.
+You can start consumer.py workers without any parameters `python consumer.py` . They will consume links form the queue, extract links from documents, and store the results in redis database set, so only unique links are stored. 
+Only  http links are stored.
 
-Consumers also print results to stdout, and work even without redis.
+Consumers also print unique results to stdout, and work even without redis.

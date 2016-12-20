@@ -24,12 +24,12 @@ def consumer(ch, method, properties, body):
         source = html.fromstring(message['source'])
         source.make_links_absolute(base_url=base_url)
         links = source.xpath('//a/@href')
-        links = filter(lambda l: l.startswith('http'), links)
+        links = set(filter(lambda l: l.startswith('http'), links))
         print(message['link']+', '+" ".join(links))
         try:
-            redis_connection.set(message['link'], " ".join(links))
+            redis_connection.sadd(message['link'], *links)
         except:
-            logging.error('Failed to write to redis '+ message['link'])
+            logging.error('Failed to write results to redis '+ message['link'])
     except Exception as e:
         logging.error(e, exc_info=True)
 
