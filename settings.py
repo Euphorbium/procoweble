@@ -15,6 +15,6 @@ TIMEOUT = 3 # how long to wait for the web server to respond, in seconds
 REDIS = {} # redis server connection settings, defaults to localhost, port=6379 , db=0
 
 try:
-     from test_settings import *
+     from local_settings import *
 except ImportError as e:
      pass
